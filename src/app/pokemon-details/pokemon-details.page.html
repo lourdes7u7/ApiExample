@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{ pokemonDetails?.name | titlecase }}
+    </ion-title>
+  </ion-toolbar> 
+</ion-header>
+
+<ion-content>
+  <!-- Spinner de carga -->
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
+
+  <!-- Detalles del Pokémon -->
+  <div *ngIf="!isLoading && pokemonDetails" class="pokemon-details">
+    <ion-img [src]="pokemonDetails.sprites.front_default"></ion-img>
+    <ion-list>
+      <ion-item>
+        <ion-label>Altura: {{ pokemonDetails.height / 10 }} m</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Peso: {{ pokemonDetails.weight / 10 }} kg</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Tipos:</ion-label>
+        <ion-chip *ngFor="let type of pokemonDetails.types">
+          {{ type.type.name | titlecase }}
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
